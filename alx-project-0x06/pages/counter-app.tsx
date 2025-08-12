@@ -1,22 +1,27 @@
-// pages/counter-app.tsx
 import React from "react";
-import { useSelector, useDispatch } from "react-redux";
-import { RootState, AppDispatch } from "../store/store";
-import { increment, decrement, reset } from "../slices/counterSlice";
+import { useSelector } from "react-redux";
+import { increment, decrement } from "../store/store";
+import { RootState, AppDispatch, useAppDispatch } from "../store/store";
 
-const CounterApp: React.FC = () => {
+export default function CounterApp() {
   const count = useSelector((state: RootState) => state.counter.value);
-  const dispatch: AppDispatch = useDispatch();
+  const dispatch: AppDispatch = useAppDispatch();
 
   return (
-    <div style={{ padding: "20px" }}>
-      <h1>Counter App</h1>
-      <p>Count: {count}</p>
-      <button onClick={() => dispatch(increment())}>Increment</button>
-      <button onClick={() => dispatch(decrement())}>Decrement</button>
-      <button onClick={() => dispatch(reset())}>Reset</button>
+    <div className="p-4">
+      <h1 className="text-2xl mb-4">Counter: {count}</h1>
+      <button
+        onClick={() => dispatch(increment())}
+        className="bg-green-500 px-4 py-2 text-white rounded mr-2"
+      >
+        Increment
+      </button>
+      <button
+        onClick={() => dispatch(decrement())}
+        className="bg-red-500 px-4 py-2 text-white rounded"
+      >
+        Decrement
+      </button>
     </div>
   );
-};
-
-export default CounterApp;
+}
